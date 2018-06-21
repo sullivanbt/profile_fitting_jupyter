@@ -1,0 +1,2 @@
+# profile_fitting_jupyter
+Jupyter notebook for visualizing IntegratePeaksProfileFitting
