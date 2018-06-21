@@ -1,8 +1,8 @@
 from __future__ import print_function
 import numpy as np
-import ICCFitTools as ICCFT
-import pickle
 from mantid.simpleapi import *
+from ICCFitTools import getModeratorCoefficients
+import pickle
 import sys
 
 # These are parameters for fitting.
@@ -39,13 +39,11 @@ MDdata = ConvertToMD(InputWorkspace='event_ws',  QDimensions='Q3D', dEAnalysisMo
 peaks_ws = LoadIsawPeaks(Filename=peaksFile, OutputWorkspace='peaks_ws')
 LoadIsawUB(InputWorkspace=peaks_ws, Filename=UBFile)
 UBMatrix = peaks_ws.sample().getOrientedLattice().getUB()
-dQ = np.abs(ICCFT.getDQFracHKL(UBMatrix, frac=0.5))
-dQ[dQ>DQMax]=DQMax
 if sys.version_info[0] == 2:
     strongPeakParams = pickle.load(open(strongPeakParamsFile, 'rb'))
 else:
     strongPeakParams = pickle.load(open(strongPeakParamsFile, 'rb'),encoding='latin1')
-padeCoefficients = ICCFT.getModeratorCoefficients(moderatorCoefficientsFile)
+padeCoefficients = getModeratorCoefficients(moderatorCoefficientsFile)
 
 #This will integrate the whole peakset
 IntegratePeaksProfileFitting(OutputPeaksWorkspace='peaks_ws_out', OutputParamsWorkspace='params_ws',
