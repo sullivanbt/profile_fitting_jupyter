@@ -46,11 +46,20 @@ else:
 padeCoefficients = getModeratorCoefficients(moderatorCoefficientsFile)
 
 #This will integrate the whole peakset
-IntegratePeaksProfileFitting(OutputPeaksWorkspace='peaks_ws_out', OutputParamsWorkspace='params_ws',
+try:
+    IntegratePeaksProfileFitting(OutputPeaksWorkspace='peaks_ws_out', OutputParamsWorkspace='params_ws',
          InputWorkspace=MDdata, PeaksWorkspace=peaks_ws, RunNumber=RunNumber, DtSpread=DtSpread,
          UBFile=UBFile,
          ModeratorCoefficientsFile=moderatorCoefficientsFile,
          predpplCoefficients=PredPplCoefficients,
          MinpplFrac=MinpplFrac, MaxpplFrac=MaxpplFrac, MindtBinWidth=MindtBinWidth,
          StrongPeakParamsFile=strongPeakParamsFile)
+except:
+    IntegratePeaksProfileFitting(OutputPeaksWorkspace='peaks_ws_out', OutputParamsWorkspace='params_ws',
+         InputWorkspace=MDdata, PeaksWorkspace=peaks_ws, RunNumber=RunNumber, DtSpread=DtSpread,
+         UBFile=UBFile,
+         ModeratorCoefficientsFile=moderatorCoefficientsFile,
+         MinpplFrac=MinpplFrac, MaxpplFrac=MaxpplFrac, MindtBinWidth=MindtBinWidth,
+         StrongPeakParamsFile=strongPeakParamsFile)
+    
 
