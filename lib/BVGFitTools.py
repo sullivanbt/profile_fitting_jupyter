@@ -8,6 +8,8 @@ from scipy.ndimage.filters import convolve
 from matplotlib.mlab import bivariate_normal
 import ICConvoluted as ICC
 import BivariateGaussian as BivariateGaussian
+reload(BivariateGaussian)
+reload(ICC)
 plt.ion()
 
 
